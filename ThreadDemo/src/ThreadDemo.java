@@ -1,3 +1,20 @@
+import java.util.concurrent.*;
+
+import org.omg.CORBA.Context;
+import org.omg.CORBA.ContextList;
+import org.omg.CORBA.DomainManager;
+import org.omg.CORBA.ExceptionList;
+import org.omg.CORBA.NVList;
+import org.omg.CORBA.NamedValue;
+import org.omg.CORBA.Object;
+import org.omg.CORBA.Policy;
+import org.omg.CORBA.Request;
+import org.omg.CORBA.SetOverrideType;
+import org.omg.PortableServer.ThreadPolicy;
+import org.omg.PortableServer.ThreadPolicyValue;
+
+import com.sun.corba.se.impl.orbutil.closure.Future;
+
 /**
  * 创建启动线程
  * 创建Thread子类对象
@@ -8,13 +25,12 @@
  *
  */
 public class ThreadDemo{
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		/*
 		SubThread sThread = new SubThread();
 		sThread.start();
 		Thread.currentThread().setName("123");
 		*/
-		
 		
 		/*RunnableDemo rDemo = new RunnableDemo();
 		Thread thread = new Thread(rDemo);
@@ -43,5 +59,25 @@ public class ThreadDemo{
 			}
 		}).start();
 		
+		
+		/**
+		 * 使用线程池
+		 */
+		//调用 工厂 类的静态方法，创建线程池对象 ，返回线程池对象
+		ExecutorService es = Executors.newFixedThreadPool(3);
+		//调用接口实现类对象es中的方法submit提交线程任务
+		
+		//使用Runnable接口
+		//es.submit(new RunnableDemo());
+		//es.submit(new RunnableDemo());
+		//es.submit(new RunnableDemo());
+		
+		//使用Callable接口,返回Future接口实现类
+		
+		java.util.concurrent.Future<Integer> f = es.submit(new ThreadPoolCallable(100));
+		java.util.concurrent.Future<Integer> f2 = es.submit(new ThreadPoolCallable(200));
+		System.out.println(f.get());
+		System.out.println(f2.get());
+		es.shutdown();
 	}
 }
