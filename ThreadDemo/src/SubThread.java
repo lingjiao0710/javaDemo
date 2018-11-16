@@ -2,8 +2,8 @@
 /**
  * 
  * @author Flj
- *	¶¨Òå×ÓÀà£¬¼Ì³ĞThread
- *	ÖØĞ´·½·¨run
+ *	å®šä¹‰å­ç±»ï¼Œç»§æ‰¿Thread
+ *	é‡å†™æ–¹æ³•run
  */
 public class SubThread extends Thread{
 	public SubThread() {
@@ -11,10 +11,10 @@ public class SubThread extends Thread{
 		setName("1234");
 	}
 	public void run() {
-		//Òì³£»áÏÔÊ¾¡°Thread-0¡±
+		//å¼‚å¸¸ä¼šæ˜¾ç¤ºâ€œThread-0â€
 		//System.out.println(0/0);
 		
-		//»ñÈ¡Ïß³ÌÃû×Ö
+		//è·å–çº¿ç¨‹åå­—
 		System.out.println(getName());
 		
 		for(int i = 0; i < 50; i++) {

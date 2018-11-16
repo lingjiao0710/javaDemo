@@ -8,14 +8,14 @@ public class ReflectionDemo {
 		@SuppressWarnings("rawtypes")
 		//Class cls = new Iphone().getClass();
 		
-		//2.�?.class()
+		//2.类名.class()
 		//cls = Iphone.class;
 		
 		//3.Class.forName("包名.类名")
 		Class cls = Class.forName("com.flj.reflection.Iphone");
 		
 		//创建对象
-		//不推荐这种方�?
+		//不推荐这种方式
 		//Iphone i2 = (Iphone) cls.newInstance();
 		
 		//推荐

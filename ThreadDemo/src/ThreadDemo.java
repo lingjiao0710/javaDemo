@@ -16,10 +16,10 @@ import org.omg.PortableServer.ThreadPolicyValue;
 import com.sun.corba.se.impl.orbutil.closure.Future;
 
 /**
- * ´´½¨Æô¶¯Ïß³Ì
- * ´´½¨Thread×ÓÀà¶ÔÏó
- * ×ÓÀà¶ÔÏóµ÷ÓÃ·½·¨start()
- * JVMµ÷ÓÃÏß³ÌÖĞµÄrun
+ * åˆ›å»ºå¯åŠ¨çº¿ç¨‹
+ * åˆ›å»ºThreadå­ç±»å¯¹è±¡
+ * å­ç±»å¯¹è±¡è°ƒç”¨æ–¹æ³•start()
+ * JVMè°ƒç”¨çº¿ç¨‹ä¸­çš„run
  * @author Flj
  *	
  *
@@ -37,7 +37,7 @@ public class ThreadDemo{
 		thread.start();
 		 */
 		
-		//Thread.currentThread·µ»Øµ±Ç°ÔËĞĞµÄÏß³Ì¶ÔÏó£¬Í¨¹ı¶ÔÏó¿ÉÒÔµÃµ½Ïß³ÌÃû³Æ
+		//Thread.currentThreadè¿”å›å½“å‰è¿è¡Œçš„çº¿ç¨‹å¯¹è±¡ï¼Œé€šè¿‡å¯¹è±¡å¯ä»¥å¾—åˆ°çº¿ç¨‹åç§°
 		System.out.println("main Thread: "+ Thread.currentThread().getName());
 		
 		/*for(int i = 0; i < 50; i++) {
@@ -45,14 +45,14 @@ public class ThreadDemo{
 			System.out.println("main ---- "+ i);
 		}*/
 		
-		//ÄäÃûÄÚ²¿Àà´´½¨Ïß³Ì·½·¨1
+		//åŒ¿åå†…éƒ¨ç±»åˆ›å»ºçº¿ç¨‹æ–¹æ³•1
 		new Thread() {
 			public void run() {
 				System.out.println("111");
 			};
 		}.start();
 		
-		//ÄäÃûÄÚ²¿Àà´´½¨Ïß³Ì·½·¨2,Ê¹ÓÃ½Ó¿Ú·½Ê½
+		//åŒ¿åå†…éƒ¨ç±»åˆ›å»ºçº¿ç¨‹æ–¹æ³•2,ä½¿ç”¨æ¥å£æ–¹å¼
 		new Thread(new Runnable() {
 			public void run() {
 				System.out.println("222");
@@ -61,23 +61,49 @@ public class ThreadDemo{
 		
 		
 		/**
-		 * Ê¹ÓÃÏß³Ì³Ø
+		 * ä½¿ç”¨çº¿ç¨‹æ± 
 		 */
-		//µ÷ÓÃ ¹¤³§ ÀàµÄ¾²Ì¬·½·¨£¬´´½¨Ïß³Ì³Ø¶ÔÏó £¬·µ»ØÏß³Ì³Ø¶ÔÏó
-		ExecutorService es = Executors.newFixedThreadPool(3);
-		//µ÷ÓÃ½Ó¿ÚÊµÏÖÀà¶ÔÏóesÖĞµÄ·½·¨submitÌá½»Ïß³ÌÈÎÎñ
+		//è°ƒç”¨ å·¥å‚ ç±»çš„é™æ€æ–¹æ³•ï¼Œåˆ›å»ºçº¿ç¨‹æ± å¯¹è±¡ ï¼Œè¿”å›çº¿ç¨‹æ± å¯¹è±¡
+		//ExecutorService es = Executors.newFixedThreadPool(3);
+		//è°ƒç”¨æ¥å£å®ç°ç±»å¯¹è±¡esä¸­çš„æ–¹æ³•submitæäº¤çº¿ç¨‹ä»»åŠ¡
 		
-		//Ê¹ÓÃRunnable½Ó¿Ú
+		//ä½¿ç”¨Runnableæ¥å£
 		//es.submit(new RunnableDemo());
 		//es.submit(new RunnableDemo());
 		//es.submit(new RunnableDemo());
 		
-		//Ê¹ÓÃCallable½Ó¿Ú,·µ»ØFuture½Ó¿ÚÊµÏÖÀà
+		//ä½¿ç”¨Callableæ¥å£,è¿”å›Futureæ¥å£å®ç°ç±»
 		
-		java.util.concurrent.Future<Integer> f = es.submit(new ThreadPoolCallable(100));
-		java.util.concurrent.Future<Integer> f2 = es.submit(new ThreadPoolCallable(200));
-		System.out.println(f.get());
-		System.out.println(f2.get());
-		es.shutdown();
+		//java.util.concurrent.Future<Integer> f = es.submit(new ThreadPoolCallable(100));
+		//java.util.concurrent.Future<Integer> f2 = es.submit(new ThreadPoolCallable(200));
+		//System.out.println(f.get());
+		//System.out.println(f2.get());
+		//es.shutdown();
+		
+		
+		/**
+		 * æŠ¢ç¥¨
+		 * 
+		 */
+		//Ticket ticket = new Ticket();
+		//Thread thread1 = new Thread(ticket);
+		//Thread thread2 = new Thread(ticket);
+		//Thread thread3 = new Thread(ticket);
+		//thread1.start();thread2.start();thread3.start();
+		
+		
+		/**
+		 * å¼€å¯è¾“å…¥è¾“å‡ºçº¿ç¨‹ï¼Œå®ç°èµ‹å€¼å’Œæ‰“å°
+		 */
+		
+		Input input = new Input();
+		Output output = new Output();
+		
+		Thread inThread = new Thread(input);
+		Thread ouThread = new Thread(output);
+		
+		inThread.start();
+		ouThread.start();
+		
 	}
 }
